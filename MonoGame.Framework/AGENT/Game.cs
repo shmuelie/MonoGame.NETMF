@@ -37,8 +37,15 @@ namespace Microsoft.Xna.Framework
             private set;
         }
 
+        public TimeSpan TargetElapsedTime
+        {
+            get;
+            set;
+        }
+
         public Game()
         {
+            TargetElapsedTime = new TimeSpan(0, 0, 0, 0, 100);
         }
 
         public virtual void Initialize()
@@ -61,7 +68,7 @@ namespace Microsoft.Xna.Framework
             Graphics.GraphicsDevice.SetRenderTarget(null);
             Initialize();
             LoadContent();
-            timer = new Timer(Tick, null, TimeSpan.FromTicks(0), new TimeSpan(0, 0, 0, 0, 100));
+            timer = new Timer(Tick, null, TimeSpan.FromTicks(0), TargetElapsedTime);
         }
 
         public void ResetElapsedTime()
