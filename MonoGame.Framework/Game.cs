@@ -12,6 +12,7 @@ namespace Microsoft.Xna.Framework
         private DateTime lastCallToDraw;
         private DateTime lastCallToUpdate;
         private Timer timer;
+        private TimeSpan targetElapsedTime;
 
         internal Bitmap Display
         {
@@ -37,7 +38,6 @@ namespace Microsoft.Xna.Framework
             private set;
         }
 
-        private TimeSpan targetElapsedTime;
         public TimeSpan TargetElapsedTime
         {
             get
