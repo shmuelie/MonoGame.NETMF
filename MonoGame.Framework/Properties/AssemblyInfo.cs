@@ -1,40 +1,12 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
-#if !AGENT
-using System.Runtime.CompilerServices;
-using System.Resources;
-#endif
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MonoGame.Framework")]
-#if OUYA
-[assembly: AssemblyDescription("MonoGame for OUYA")]
-#elif ANDROID
-[assembly: AssemblyDescription("MonoGame for Android")]
-#elif WINDOWS
-#if DIRECTX
-[assembly: AssemblyDescription("MonoGame for Windows Desktop (DirectX)")]
-#else
-[assembly: AssemblyDescription("MonoGame for Windows Desktop (OpenGL)")]
-#endif
-#elif PSM
-[assembly: AssemblyDescription("MonoGame for PlayStation Mobile")]
-#elif LINUX
-[assembly: AssemblyDescription("MonoGame for Linux")]
-#elif MAC
-[assembly: AssemblyDescription("MonoGame for Mac OS X")]
-#elif IOS
-[assembly: AssemblyDescription("MonoGame for iOS")]
-#elif WINDOWS_STOREAPP
-[assembly: AssemblyDescription("MonoGame for Windows Store")]
-#elif WINDOWS_PHONE
-[assembly: AssemblyDescription("MonoGame for Windows Phone 8")]
-#elif AGENT
-[assembly: AssemblyDescription("MonoGame for Agent")]
-#endif
+[assembly: AssemblyDescription("MonoGame for .NET MicroFramework")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MonoGame.Framework")]
@@ -65,6 +37,3 @@ using System.Resources;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("3.0.0.0")]
 [assembly: AssemblyFileVersion("3.0.0.0")]
-#if !AGENT
-[assembly: NeutralResourcesLanguageAttribute("en-US")]
-#endif
