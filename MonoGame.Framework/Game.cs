@@ -37,10 +37,18 @@ namespace Microsoft.Xna.Framework
             private set;
         }
 
+        private TimeSpan targetElapsedTime;
         public TimeSpan TargetElapsedTime
         {
-            get;
-            set;
+            get
+            {
+                return targetElapsedTime;
+            }
+            set
+            {
+                timer.Change(TimeSpan.FromTicks(0), value);
+                targetElapsedTime = value;
+            }
         }
 
         public Game()
