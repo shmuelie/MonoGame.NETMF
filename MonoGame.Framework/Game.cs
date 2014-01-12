@@ -147,7 +147,7 @@ namespace Microsoft.Xna.Framework
             if (IsFixedTimeStep)
             {
                 gameTime.ElapsedGameTime = TargetElapsedTime;
-                var stepCount = 0;
+                int stepCount = 0;
 
                 gameTime.IsRunningSlowly = (accumulatedElapsedTime > TargetElapsedTime);
 
@@ -179,7 +179,9 @@ namespace Microsoft.Xna.Framework
 
             // Draw unless the update suppressed it.
             if (suppressDraw)
+            {
                 suppressDraw = false;
+            }
             else
             {
                 Draw(gameTime);
