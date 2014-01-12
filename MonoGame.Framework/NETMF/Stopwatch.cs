@@ -7,14 +7,14 @@ namespace System.Diagnostics
         private static readonly TimeSpan period = TimeSpan.FromTicks(TimeSpan.TicksPerMillisecond * 100);
         private static readonly TimeSpan due = TimeSpan.FromTicks(0);
         private Timer timer;
-        private DateTime? startDate;
-        private DateTime? currentDate;
+        private DateTime startDate;
+        private DateTime currentDate;
 
         public Stopwatch()
         {
             timer = null;
-            startDate = null;
-            currentDate = null;
+            startDate = DateTime.MinValue;
+            currentDate = DateTime.MinValue;
         }
 
         private void Callback(object state)
@@ -26,7 +26,11 @@ namespace System.Diagnostics
         {
             get
             {
-                return currentDate - startDate;
+                if ((currentDate != DateTime.MinValue) && (startDate != DateTime.MinValue))
+                {
+                    return currentDate - startDate;
+                }
+                return due;
             }
         }
 
@@ -56,7 +60,7 @@ namespace System.Diagnostics
 
         public void Start()
         {
-            if (startDate == null)
+            if (startDate == DateTime.MinValue)
             {
                 startDate = DateTime.UtcNow;
                 currentDate = startDate;
@@ -66,15 +70,18 @@ namespace System.Diagnostics
 
         public void Stop()
         {
-            timer.Dispose();
-            timer = null;
+            if (timer != null)
+            {
+                timer.Dispose();
+                timer = null;
+            }
         }
 
         public void Reset()
         {
             Stop();
-            startDate = null;
-            currentDate = null;
+            startDate = DateTime.MinValue;
+            currentDate = DateTime.MinValue;
         }
 
         public void Restart()
