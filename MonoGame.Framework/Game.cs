@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Microsoft.Xna.Framework
 {
+    /// <summary>
+    ///     Provides basic graphics device initialization, game logic, and rendering code.
+    /// </summary>
     public class Game
     {
         private readonly TimeSpan maxElapsedTime = TimeSpan.FromTicks(500 * TimeSpan.TicksPerMillisecond);
@@ -24,6 +27,13 @@ namespace Microsoft.Xna.Framework
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the current <see cref="Microsoft.Xna.Framework.ContentManager"/>.
+        /// </summary>
+        /// <value>
+        ///     The current <see cref="Microsoft.Xna.Framework.ContentManager"/>.
+        /// </value>
+        /// <seealso cref="Microsoft.Xna.Framework.Game"/>
         public ContentManager Content
         {
             get;
@@ -42,6 +52,23 @@ namespace Microsoft.Xna.Framework
             private set;
         }
 
+        /// <summary>
+        ///     Gets or sets the target time between calls to <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> when <see cref="Microsoft.Xna.Framework.Game.IsFixedTimeStep"/> is <c>true</c>. 
+        /// </summary>
+        /// <value>
+        ///     The target time period for the game loop.
+        /// </value>
+        /// <remarks>
+        ///     When the game frame rate is less than <c>TargetElapsedTime</c>, <see cref="Microsoft.Xna.Framework.Game.IsRunningSlowly"/> will return <c>true</c>. 
+        ///     
+        ///     The default value for <see cref="Microsoft.Xna.Framework.Game.TargetElapsedTime"/> is 1/10th of a second.
+        ///     
+        ///     A fixed-step <see cref="Microsoft.Xna.Framework.Game"/> tries to call its <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> method on the fixed interval specified in <see cref="Microsoft.Xna.Framework.Game.TargetElapsedTime"/>. Setting <see cref="Microsoft.Xna.Framework.Game.IsFixedTimeStep"/> to <c>true</c> causes a <see cref="Microsoft.Xna.Framework.Game"/> to use a fixed-step game loop. A new MonoGame project uses a fixed-step game loop with a default <see cref="Microsoft.Xna.Framework.Game.TargetElapsedTime"/> of 1/10th of a second.
+        ///     
+        ///     In a fixed-step game loop, <see cref="Microsoft.Xna.Framework.Game"/> calls <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> once the <see cref="Microsoft.Xna.Framework.Game.TargetElapsedTime"/> has elapsed. After <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> is called, if it is not time to call <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> again, <see cref="Microsoft.Xna.Framework.Game"/> calls <see cref="Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)"/>.
+        ///     
+        ///     If <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> takes too long to process, <see cref="Microsoft.Xna.Framework.Game"/> sets <see cref="Microsoft.Xna.Framework.Game.IsRunningSlowly"/> to <c>true</c> and calls <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> again, without calling <see cref="Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)"/> in between. When an update runs longer than the <see cref="Microsoft.Xna.Framework.GameTime.TargetElapsedTime"/>, <see cref="Microsoft.Xna.Framework.Game"/> responds by calling <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> extra times and dropping the frames associated with those updates to catch up. This ensures that <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> will have been called the expected number of times when the game loop catches up from a slowdown. You can check the value of <see cref="Microsoft.Xna.Framework.GameTime.IsRunningSlowly"/> in your <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> if you want to detect dropped frames and shorten your <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> processing to compensate. You can reset the elapsed times by calling <see cref="Microsoft.Xna.Framework.Game.ResetElapsedTime()"/>.
+        /// </remarks>
         public TimeSpan TargetElapsedTime
         {
             get
@@ -58,6 +85,21 @@ namespace Microsoft.Xna.Framework
             }
         }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether to use fixed time steps. 
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if using fixed time steps; <c>false</c> otherwise. 
+        /// </value>
+        /// <remarks>
+        ///     The default value for IsFixedTimeStep is <c>true</c>.
+        ///     
+        ///     A fixed-step <see cref="Microsoft.Xna.Framework.Game"/> tries to call its <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> method on the fixed interval specified in <see cref="Microsoft.Xna.Framework.Game.TargetElapsedTime"/>. Setting <see cref="Microsoft.Xna.Framework.Game.IsFixedTimeStep"/> to <c>true</c> causes a <see cref="Microsoft.Xna.Framework.Game"/> to use a fixed-step game loop. A new MonoGame project uses a fixed-step game loop with a default <see cref="Microsoft.Xna.Framework.Game.TargetElapsedTime"/> of 1/10th of a second.
+        ///     
+        ///     In a fixed-step game loop, <see cref="Microsoft.Xna.Framework.Game"/> calls <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> once the <see cref="Microsoft.Xna.Framework.Game.TargetElapsedTime"/> has elapsed. After <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> is called, if it is not time to call <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> again, <see cref="Microsoft.Xna.Framework.Game"/> calls <see cref="Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)"/>.
+        ///     
+        ///     If <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> takes too long to process, <see cref="Microsoft.Xna.Framework.Game"/> sets <see cref="Microsoft.Xna.Framework.Game.IsRunningSlowly"/> to <c>true</c> and calls <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> again, without calling <see cref="Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)"/> in between. When an update runs longer than the <see cref="Microsoft.Xna.Framework.GameTime.TargetElapsedTime"/>, <see cref="Microsoft.Xna.Framework.Game"/> responds by calling <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> extra times and dropping the frames associated with those updates to catch up. This ensures that <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> will have been called the expected number of times when the game loop catches up from a slowdown. You can check the value of <see cref="Microsoft.Xna.Framework.GameTime.IsRunningSlowly"/> in your <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> if you want to detect dropped frames and shorten your <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> processing to compensate. You can reset the elapsed times by calling <see cref="Microsoft.Xna.Framework.Game.ResetElapsedTime()"/>.
+        /// </remarks>
         public bool IsFixedTimeStep
         {
             get;
@@ -80,6 +122,15 @@ namespace Microsoft.Xna.Framework
         {
         }
 
+        /// <summary>
+        ///     Call this method to initialize the game, begin running the game loop, and start processing events for the game. 
+        /// </summary>
+        /// <param name="display">
+        ///     The device's display.
+        /// </param>
+        /// <param name="manager">
+        ///     The <see cref="System.Resources.ResourceManager"/> for the project.
+        /// </param>
         public void Run(Bitmap display, ResourceManager manager)
         {
             Display = display;
@@ -93,6 +144,12 @@ namespace Microsoft.Xna.Framework
             timer = new Timer(Tick, null, TimeSpan.FromTicks(0), TargetElapsedTime);
         }
 
+        /// <summary>
+        ///     Resets the elapsed time counter. 
+        /// </summary>
+        /// <remarks>
+        ///     Use this method if your game is recovering from a slow-running state, and <see cref="Microsoft.Xna.Framework.GameTime.ElapsedGameTime"/> is too large to be useful.
+        /// </remarks>
         public void ResetElapsedTime()
         {
             gameTimer.Restart();
@@ -100,6 +157,12 @@ namespace Microsoft.Xna.Framework
             gameTime.ElapsedGameTime = TimeSpan.Zero;
         }
 
+        /// <summary>
+        ///     Prevents calls to <see cref="Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)"/> until the next <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/>. 
+        /// </summary>
+        /// <remarks>
+        ///     Call this method during <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> to prevent any calls to <see cref="Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)"/> until after the next call to <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/>. This method can be used on small devices to conserve battery life if the display does not change as a result of <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/>. For example, if the screen is static with no background animations, the player input can be examined during <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> to determine whether the player is performing any action. If no input is detected, this method allows the game to skip drawing until the next update. 
+        /// </remarks>
         public void SuppressDraw()
         {
             suppressDraw = true;
@@ -110,6 +173,14 @@ namespace Microsoft.Xna.Framework
             Tick();
         }
 
+        /// <summary>
+        ///     Updates the game's clock and calls <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> and <see cref="Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)"/>. 
+        /// </summary>
+        /// <remarks>
+        ///     In a fixed-step game, <see cref="Microsoft.Xna.Framework.Game.Tick()"/> calls <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> only after a target time interval has elapsed.
+        ///     
+        ///     In a variable-step game, <see cref="Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> is called every time <see cref="Microsoft.Xna.Framework.Game.Tick()"/> is called.
+        /// </remarks>
         public void Tick()
         {
             // NOTE: This code is very sensitive and can break very badly
