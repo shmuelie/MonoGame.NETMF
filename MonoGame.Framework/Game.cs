@@ -9,7 +9,7 @@ namespace Microsoft.Xna.Framework
 {
     public class Game
     {
-        private readonly TimeSpan _maxElapsedTime = TimeSpan.FromTicks(500 * TimeSpan.TicksPerMillisecond);
+        private readonly TimeSpan maxElapsedTime = TimeSpan.FromTicks(500 * TimeSpan.TicksPerMillisecond);
 
         private Timer timer;
         private TimeSpan targetElapsedTime;
@@ -137,8 +137,8 @@ namespace Microsoft.Xna.Framework
             }
 
             // Do not allow any update to take longer than our maximum.
-            if (accumulatedElapsedTime > _maxElapsedTime)
-                accumulatedElapsedTime = _maxElapsedTime;
+            if (accumulatedElapsedTime > maxElapsedTime)
+                accumulatedElapsedTime = maxElapsedTime;
 
             // http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.gametime.isrunningslowly.aspx
             // Calculate IsRunningSlowly for the fixed time step, but only when the accumulated time
