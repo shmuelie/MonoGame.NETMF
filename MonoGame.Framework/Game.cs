@@ -84,7 +84,7 @@ namespace Microsoft.Xna.Framework
 
                 if (timer != null)
                 {
-                    timer.Change(TimeSpan.FromTicks(0), value);
+                    timer.Change(TimeSpan.Zero, value);
                 }
                 targetElapsedTime = value;
             }
@@ -155,7 +155,7 @@ namespace Microsoft.Xna.Framework
             Initialize();
             LoadContent();
             ResetElapsedTime();
-            timer = new Timer(Tick, null, TimeSpan.FromTicks(0), TargetElapsedTime);
+            timer = new Timer(Tick, null, TimeSpan.Zero, TargetElapsedTime);
         }
 
         /// <summary>
