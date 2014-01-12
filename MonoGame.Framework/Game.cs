@@ -77,6 +77,11 @@ namespace Microsoft.Xna.Framework
             }
             set
             {
+                if (value <= TimeSpan.Zero)
+                {
+                    throw new ArgumentOutOfRangeException("value", "The value specified for TargetElapsedTime is not greater than zero. Specify a nonzero positive value.");
+                }
+
                 if (timer != null)
                 {
                     timer.Change(TimeSpan.FromTicks(0), value);
@@ -133,6 +138,15 @@ namespace Microsoft.Xna.Framework
         /// </param>
         public void Run(Bitmap display, ResourceManager manager)
         {
+            if (display == null)
+            {
+                throw new ArgumentNullException("display", "'display' cannot be null (Nothing in Visual Basic)");
+            }
+            if (manager == null)
+            {
+                throw new ArgumentNullException("manager", "'manager' cannot be null (Nothing in Visual Basic)");
+            }
+
             Display = display;
             Content = new ContentManager(manager);
             Graphics = new GraphicsDeviceManager(this);
