@@ -4,33 +4,22 @@ namespace System.Diagnostics
 {
     public class Stopwatch
     {
-        private static readonly TimeSpan period = TimeSpan.FromTicks(TimeSpan.TicksPerMillisecond * 10);
-        private static readonly TimeSpan due = TimeSpan.FromTicks(0);
-        private Timer timer;
         private DateTime startDate;
-        private DateTime currentDate;
 
         public Stopwatch()
         {
-            timer = null;
             startDate = DateTime.MinValue;
-            currentDate = DateTime.MinValue;
-        }
-
-        private void Callback(object state)
-        {
-            currentDate = DateTime.UtcNow;
         }
 
         public TimeSpan Elapsed
         {
             get
             {
-                if ((currentDate != DateTime.MinValue) && (startDate != DateTime.MinValue))
+                if (startDate != DateTime.MinValue)
                 {
-                    return currentDate - startDate;
+                    return DateTime.UtcNow - startDate;
                 }
-                return due;
+                return TimeSpan.FromTicks(0);
             }
         }
 
@@ -52,10 +41,8 @@ namespace System.Diagnostics
 
         public bool IsRunning
         {
-            get
-            {
-                return timer != null;
-            }
+            get;
+            private set;
         }
 
         public void Start()
@@ -63,25 +50,19 @@ namespace System.Diagnostics
             if (startDate == DateTime.MinValue)
             {
                 startDate = DateTime.UtcNow;
-                currentDate = startDate;
             }
-            timer = new Timer(Callback, null, due, period);
+            IsRunning = true;
         }
 
         public void Stop()
         {
-            if (timer != null)
-            {
-                timer.Dispose();
-                timer = null;
-            }
+            IsRunning = false;
         }
 
         public void Reset()
         {
             Stop();
             startDate = DateTime.MinValue;
-            currentDate = DateTime.MinValue;
         }
 
         public void Restart()
