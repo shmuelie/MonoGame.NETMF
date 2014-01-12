@@ -51,6 +51,12 @@ namespace Microsoft.Xna.Framework
             }
         }
 
+        public bool IsFixedTimeStep
+        {
+            get;
+            set;
+        }
+
         public Game()
         {
             TargetElapsedTime = new TimeSpan(0, 0, 0, 0, 100);
@@ -66,6 +72,7 @@ namespace Microsoft.Xna.Framework
 
         public void Run(Bitmap display, ResourceManager manager)
         {
+            IsFixedTimeStep = true;
             gameStartTime = DateTime.UtcNow;
             lastCallToDraw = gameStartTime;
             lastCallToUpdate = gameStartTime;
