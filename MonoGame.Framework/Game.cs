@@ -58,6 +58,9 @@ namespace Microsoft.Xna.Framework
         /// <value>
         ///     The target time period for the game loop.
         /// </value>
+        /// <exception cref="System.ArgumentOutOfRangeException">
+        ///     The value specified for TargetElapsedTime is not greater than zero. Specify a nonzero positive value.
+        /// </exception>
         /// <remarks>
         ///     When the game frame rate is less than <c>TargetElapsedTime</c>, <see cref="Microsoft.Xna.Framework.Game.IsRunningSlowly"/> will return <c>true</c>. 
         ///     
@@ -136,6 +139,9 @@ namespace Microsoft.Xna.Framework
         /// <param name="manager">
         ///     The <see cref="System.Resources.ResourceManager"/> for the project.
         /// </param>
+        /// <exception cref="System.ArgumentNullException">
+        ///     <paramref name="display"/> and <paramref name="manager"/> cannot be null (Nothing in Visual Basic)
+        /// </exception>
         public void Run(Bitmap display, ResourceManager manager)
         {
             if (display == null)
