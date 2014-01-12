@@ -4,7 +4,7 @@ namespace System.Diagnostics
 {
     public class Stopwatch
     {
-        private static readonly TimeSpan period = TimeSpan.FromTicks(TimeSpan.TicksPerMillisecond * 100);
+        private static readonly TimeSpan period = TimeSpan.FromTicks(TimeSpan.TicksPerMillisecond * 10);
         private static readonly TimeSpan due = TimeSpan.FromTicks(0);
         private Timer timer;
         private DateTime startDate;
