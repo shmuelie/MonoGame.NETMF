@@ -17,7 +17,6 @@ namespace Microsoft.Xna.Framework
         private readonly GameTime gameTime;
         private Stopwatch gameTimer;
         private bool suppressDraw;
-        private bool skippedTick;
 
         internal Bitmap Display
         {
@@ -71,7 +70,6 @@ namespace Microsoft.Xna.Framework
             TargetElapsedTime = new TimeSpan(0, 0, 0, 0, 100);
             gameTime = new GameTime();
             gameTimer = new Stopwatch();
-            skippedTick = false;
         }
 
         public virtual void Initialize()
